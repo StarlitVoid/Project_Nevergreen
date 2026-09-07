@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SBD_feline_assassin
   m_EditorClassIdentifier: Assembly-CSharp::Nevergreen.Data.StatBlockData
   attack: 12
-  accuracy: 100
+  accuracy: 85
   critChance: 3
   maxHP: 24
   defense: 0

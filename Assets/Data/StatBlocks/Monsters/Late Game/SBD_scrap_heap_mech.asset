@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SBD_scrap_heap_mech
   m_EditorClassIdentifier: Assembly-CSharp::Nevergreen.Data.StatBlockData
   attack: 13
-  accuracy: 80
+  accuracy: 65
   critChance: 3
   maxHP: 63
   defense: 30

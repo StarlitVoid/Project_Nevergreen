@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SBD_bile_puker
   m_EditorClassIdentifier: Assembly-CSharp::Nevergreen.Data.StatBlockData
   attack: 7
-  accuracy: 100
+  accuracy: 85
   critChance: 7
   maxHP: 24
   defense: 0

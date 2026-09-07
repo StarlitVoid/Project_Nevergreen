@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SBD_overheating_golem
   m_EditorClassIdentifier: Assembly-CSharp::Nevergreen.Data.StatBlockData
   attack: 9
-  accuracy: 80
+  accuracy: 65
   critChance: 7
   maxHP: 39
   defense: 10

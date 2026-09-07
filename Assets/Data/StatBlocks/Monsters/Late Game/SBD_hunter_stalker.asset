@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SBD_hunter_stalker
   m_EditorClassIdentifier: Assembly-CSharp::Nevergreen.Data.StatBlockData
   attack: 8
-  accuracy: 100
+  accuracy: 85
   critChance: 7
   maxHP: 35
   defense: 0

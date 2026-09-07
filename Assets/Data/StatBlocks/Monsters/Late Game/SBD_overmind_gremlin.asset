@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SBD_overmind_gremlin
   m_EditorClassIdentifier: Assembly-CSharp::Nevergreen.Data.StatBlockData
   attack: 6
-  accuracy: 100
+  accuracy: 85
   critChance: 7
   maxHP: 22
   defense: 0

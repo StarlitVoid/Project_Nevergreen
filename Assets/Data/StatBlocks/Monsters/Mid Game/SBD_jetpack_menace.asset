@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SBD_jetpack_menace
   m_EditorClassIdentifier: Assembly-CSharp::Nevergreen.Data.StatBlockData
   attack: 8
-  accuracy: 90
+  accuracy: 75
   critChance: 5
   maxHP: 24
   defense: 0

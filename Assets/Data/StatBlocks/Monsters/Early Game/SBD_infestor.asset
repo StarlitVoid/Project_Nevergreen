@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SBD_infestor
   m_EditorClassIdentifier: Assembly-CSharp::Nevergreen.Data.StatBlockData
   attack: 3
-  accuracy: 100
+  accuracy: 85
   critChance: 2
   maxHP: 10
   defense: 0

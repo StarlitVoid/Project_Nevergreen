@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SBD_corgian_bodyguard
   m_EditorClassIdentifier: Assembly-CSharp::Nevergreen.Data.StatBlockData
   attack: 7
-  accuracy: 100
+  accuracy: 85
   critChance: 0
   maxHP: 28
   defense: 10
