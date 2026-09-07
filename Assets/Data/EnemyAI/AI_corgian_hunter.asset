@@ -37,7 +37,11 @@ MonoBehaviour:
       data:
         target: 1
         statusType: 4
+        stat: 5
+        amplitudeComparison: 4
+        targetAmplitude: 1
     - rid: 4415245671264419922
       type: {class: RandomSkillBehavior, ns: Nevergreen.Combat.AI.Nodes, asm: Assembly-CSharp}
       data:
-        maxConsecutiveUses: 2
+        maxConsecutiveUses: 0
+        excludeSkill: {fileID: 0}

@@ -1,4 +1,4 @@
-#if UNITY_EDITOR
+  #if UNITY_EDITOR
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
