@@ -10,18 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 197e26672ff30064192ba41ce76df4b3, type: 3}
-  m_Name: RD_MarionetteRoom
+  m_Name: RD_ScrapsRoom
   m_EditorClassIdentifier: Assembly-CSharp::Nevergreen.Data.RoomData
-  roomId: RD_MarionetteRoom
-  roomName: Marionette Room
-  description: Add or replace a Marionette.
+  roomId: RD_ScrapsRoom
+  roomName: Scraps Room
+  description: Gain Scraps
   activationType: 2
   strategy:
-    rid: 4415245311136759899
+    rid: 7076121741356957771
   references:
     version: 2
     RefIds:
-    - rid: 4415245311136759899
-      type: {class: MarionetteRoomEffectStrategy, ns: Nevergreen.Data, asm: Assembly-CSharp}
+    - rid: 7076121741356957771
+      type: {class: ScrapsRewardRoomEffectStrategy, ns: Nevergreen.Data, asm: Assembly-CSharp}
       data:
-        marionetteSelectionPrefab: {fileID: 304171158140332193, guid: 2e2bc9268329e7246bbd5190680c7179, type: 3}
+        minScraps: 10
+        maxScraps: 25
+        scrapsRewardUiPrefab: {fileID: 3729592700914275890, guid: 357dbbc60b9aa9d4e88f7ed548da607e, type: 3}

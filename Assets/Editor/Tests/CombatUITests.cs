@@ -98,5 +98,21 @@ namespace Nevergreen.Tests
             // Cleanup
             Object.DestroyImmediate(bsGo);
         }
+
+        [Test]
+        public void CombatRewardUI_ShowReward_DisplaysPartsOnly()
+        {
+            var rewardGo = new GameObject("RewardUI");
+            var rewardUI = rewardGo.AddComponent<CombatRewardUI>();
+            var textGo = new GameObject("RewardText");
+            var text = textGo.AddComponent<TextMeshProUGUI>();
+            rewardUI.rewardText = text;
+
+            rewardUI.ShowReward(10, 5, null);
+
+            Assert.AreEqual("You found 10 Parts!", text.text, "Reward text should only display Parts and ignore Scraps.");
+            
+            Object.DestroyImmediate(rewardGo);
+        }
     }
 }

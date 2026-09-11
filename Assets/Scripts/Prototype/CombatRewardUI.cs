@@ -33,7 +33,7 @@ namespace Nevergreen.Prototype
             
             if (rewardText != null)
             {
-                rewardText.text = $"You found {parts} Parts and {scraps} Scraps!";
+                rewardText.text = $"You found {parts} Parts!";
             }
 
             if (closeButton != null)

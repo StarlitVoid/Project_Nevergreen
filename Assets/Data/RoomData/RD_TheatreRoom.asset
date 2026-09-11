@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Nevergreen.Data.RoomData
   roomId: RD_TheatreRoom
   roomName: Theatre
-  description: Unlock skills(no battle).
+  description: Unlock skills.
   activationType: 0
   strategy:
     rid: 9162808082453495887
