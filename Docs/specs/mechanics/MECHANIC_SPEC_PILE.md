@@ -18,7 +18,8 @@ the opposition to either destroy the obstacle or use skills capable of targeting
 ## Source of Truth
 - Design: [Google Doc](https://docs.google.com/document/d/1DN-fIr9PG38hDRrMWJ5NrbWfTY-V7gf5Dz2cwSw3qUo/edit?usp=sharing) (Sections: Combat, Pile)
 - Code: 
-  - `Assets/Scripts/Combat/BattleSystem.cs`: Creation (`FinalizeCharacterDefeat`), Expiry (`TickPileDurations`), and Targeting (`GetValidTargets`).
+  - `Assets/Scripts/Combat/BattleSystem.cs`: Expiry (`EndRound`), and Targeting (`GetValidTargets`).
+  - `Assets/Scripts/Combat/CharacterLifecycleManager.cs`: Creation (`FinalizeCharacterDefeat`).
   - `Assets/Scripts/Combat/CombatCharacter.cs`: State management (`LifeState`), Healing refusal (`Heal`), and Innate Move Resist (`GetEffectiveStats`).
   - `Assets/Scripts/Prototype/HPBar.cs`: Visual state representation (Gray color, scaled max HP).
 - Tests: 
@@ -43,14 +44,14 @@ Transitions:
 1. `Alive` -> `Dying` immediately when `HP` reaches 0.
 2. `Dying` -> `Pile` when death animation finishes AND `isCritical == false` AND `leavesPileOnDeath == true`.
 3. `Dying` -> `Destroyed` when death animation finishes AND (`isCritical == true` OR `leavesPileOnDeath == false`).
-4. `Pile` -> `Destroyed` when `HP` reaches 0 (as a Pile) OR after 4 turn actions.
+4. `Pile` -> `Destroyed` when `HP` reaches 0 (as a Pile) OR after its duration (in rounds) expires.
 5. Entering `Destroyed` state triggers `BattleSystem.HandleCharacterDestroyed` which removes the
    character from the `_playerTeam` or `_enemyTeam` list and initiates rank-shifting tweens.
 
 ## Timing Model
-- Update domain: Turn-based.
-- Expiry: Piles decay by 1 duration unit after **every** character's action in battle.
-- Order dependencies: Pile expiry is checked at the end of `BattleSystem.ProcessTurn` after all animations have cleared.
+- Update domain: Round-based.
+- Expiry: Piles decay by 1 duration unit at the end of **every round** in battle.
+- Order dependencies: Pile expiry is checked in `BattleSystem.EndRound` before `OnRoundEnded`.
 
 ## Determinism
 - Deterministic across clients: Yes.
@@ -71,7 +72,7 @@ EffectiveMoveResist = BaseMoveResist + 300
 | --- | --- | --- | --- |
 | `Pile Move Resist` | 300 | % | `CombatCharacter.cs` |
 | `Pile HP Multiplier` | 0.5 | factor | `BattleSystem.cs` |
-| `Pile Duration` | 4 | turns | `BattleSystem.cs` |
+| `Pile Duration` | 4 | rounds | `CombatConfig.cs` |
 
 ## Interaction Rules
 - **Healing Refusal**: Piles reject all healing. `CombatCharacter.Heal` returns immediately if state is `Pile`.
@@ -104,7 +105,7 @@ EffectiveMoveResist = BaseMoveResist + 300
   - `CheckBattleEnd_CeciliaIsPile_TriggersDefeat`: Confirms lose condition.
 - **Playtest**: 
   - Verify HP bar turns gray and rescales correctly.
-  - Verify Piles disappear after 4 actions.
+  - Verify Piles disappear after configured rounds (default: 4).
 
 ## Validation
 - [x] Facts match current code/content

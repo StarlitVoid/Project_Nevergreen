@@ -278,18 +278,6 @@ namespace Nevergreen.Combat
                 }
             }
 
-            // Tick durations for all Piles after every character action
-            foreach (var c in _playerTeam.Concat(_enemyTeam).Where(c => c.IsPile).ToList())
-            {
-                c.pileDuration--;
-
-                // If the Pile has decayed, move to Destroyed state
-                if (c.pileDuration <= 0)
-                {
-                    c.state = LifeState.Destroyed;
-                    Debug.Log($"[BattleSystem] {c.DisplayName} Pile has decayed and is now Destroyed.");
-                }
-            }
 
             // Check if battle ended during the action
             if (CheckBattleEnd())
@@ -469,6 +457,20 @@ namespace Nevergreen.Combat
         private IEnumerator EndRound()
         {
             Debug.Log($"[BattleSystem] === Round {CurrentRound} End ===");
+
+            // Tick durations for all Piles at the end of each round
+            foreach (var c in _playerTeam.Concat(_enemyTeam).Where(c => c.IsPile).ToList())
+            {
+                c.pileDuration--;
+
+                // If the Pile has decayed, move to Destroyed state
+                if (c.pileDuration <= 0)
+                {
+                    c.state = LifeState.Destroyed;
+                    Debug.Log($"[BattleSystem] {c.DisplayName} Pile has decayed and is now Destroyed.");
+                }
+            }
+
             OnRoundEnded?.Invoke(CurrentRound);
 
             // Wait for any round-end animations (e.g., boss strike)

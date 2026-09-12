@@ -161,7 +161,7 @@ namespace Nevergreen.Tests
             battleSystem.StartBattle(new List<CombatCharacter> { c }, new List<CombatCharacter>());
             c.TakeDamage(c.currentHP + 1);
 
-            Assert.AreEqual(4, c.pileDuration, "Pile should have innate duration of 4.");
+            Assert.AreEqual(_config.pileDuration, c.pileDuration, "Pile should have duration initialized from CombatConfig.");
             Assert.AreEqual(300 + c.baseStats.moveResist, c.GetEffectiveStats().moveResist,
                 "Pile should have innate +300 Move Resist bonus.");
         }
@@ -173,7 +173,7 @@ namespace Nevergreen.Tests
             c.state = LifeState.Pile;
             c.pileDuration = 1;
 
-            // Simulate the decay logic in BattleSystem.ProcessTurn
+            // Simulate the decay logic in BattleSystem.EndRound
             c.pileDuration--;
             if (c.pileDuration <= 0)
             {

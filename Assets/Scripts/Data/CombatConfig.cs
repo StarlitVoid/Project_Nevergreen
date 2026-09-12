@@ -86,6 +86,10 @@ namespace Nevergreen.Data
         [Tooltip("Number of ranks per team (GDD: 4).")]
         public int rankCount = 4;
 
+        [Header("Pile")]
+        [Tooltip("Duration in rounds before a Pile decays and transitions to Destroyed state.")]
+        public int pileDuration = 4;
+
         [Header("Leveling")]
         [Tooltip("Global maximum character level.")]
         public int globalMaxLevel = 10;

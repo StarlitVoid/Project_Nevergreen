@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Nevergreen.Data;
 
 namespace Nevergreen.Combat
 {
@@ -107,7 +108,14 @@ namespace Nevergreen.Combat
             {
                 character.state = LifeState.Pile;
                 character.currentHP = character.baseStats.maxHP / 2;
-                character.pileDuration = 4; // Decay after 4 character actions
+                
+                int defaultDuration = 4;
+                var config = GameDatabase.Instance != null ? GameDatabase.Instance.CombatConfig : null;
+                if (config != null)
+                {
+                    defaultDuration = config.pileDuration;
+                }
+                character.pileDuration = defaultDuration;
 
                 // Clear all previous status effects (Bleeds, Buffs, etc.)
                 character.statusEffects.Clear();
