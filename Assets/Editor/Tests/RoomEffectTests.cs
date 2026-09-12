@@ -685,9 +685,64 @@ namespace Nevergreen.Tests
             // Assert
             Assert.IsFalse(go.activeSelf, "UI should be deactivated after choice");
 
-            UnityEngine.Object.DestroyImmediate(characterAsset);
             UnityEngine.Object.DestroyImmediate(go);
             UnityEngine.Object.DestroyImmediate(combatUIGo);
+        }
+
+        // ============================================================
+        // ScrapsRewardRoomEffectStrategy Tests
+        // ============================================================
+
+        [Test]
+        public void ScrapsRewardRoomEffectStrategy_Execute_CreatesUIPopup()
+        {
+            // Arrange
+            var canvasGO = new GameObject("TestCanvas");
+            var canvas = canvasGO.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+
+            var combatUIGO = new GameObject("CombatUI");
+            var combatUI = combatUIGO.AddComponent<Nevergreen.Prototype.CombatUI>();
+
+            var popupPrefab = new GameObject("ScrapsPopupPrefab");
+            popupPrefab.AddComponent<RectTransform>();
+            var controller = popupPrefab.AddComponent<Nevergreen.UI.ScrapsRewardUIController>();
+            
+            var textGo = new GameObject("RewardText");
+            controller.rewardText = textGo.AddComponent<TMPro.TextMeshProUGUI>();
+
+            var btnGo = new GameObject("ClaimButton");
+            controller.claimButton = btnGo.AddComponent<UnityEngine.UI.Button>();
+
+            var panelGo = new GameObject("Panel");
+            controller.panel = panelGo;
+
+            var strategy = new ScrapsRewardRoomEffectStrategy();
+            var field = typeof(ScrapsRewardRoomEffectStrategy).GetField("scrapsRewardUiPrefab", BindingFlags.NonPublic | BindingFlags.Instance);
+            field.SetValue(strategy, popupPrefab);
+
+            // Set fixed scraps amount for testing predictability if needed, or let it random roll
+            
+            // Act
+            strategy.ExecuteRoomEffect();
+
+            // Assert
+            var spawnedPopup = canvasGO.transform.Find("ScrapsPopupPrefab(Clone)");
+            Assert.IsNotNull(spawnedPopup, "Scraps popup prefab should be instantiated under the canvas.");
+            
+            // Click Claim button to grant scraps
+            var spawnedController = spawnedPopup.GetComponent<Nevergreen.UI.ScrapsRewardUIController>();
+            UnityEngine.TestTools.LogAssert.Expect(LogType.Error, "Destroy may not be called from edit mode! Use DestroyImmediate instead.\nDestroying an object in edit mode destroys it permanently.");
+            spawnedController.claimButton.onClick.Invoke();
+
+            // Verify RunSessionManager Scraps updated
+            // It randomly rolls between 30 and 70 (default min/max) so > 0
+            Assert.Greater(RunSessionManager.Scraps, 0, "Scraps should be awarded to the run session.");
+
+            // Cleanup
+            UnityEngine.Object.DestroyImmediate(canvasGO);
+            UnityEngine.Object.DestroyImmediate(popupPrefab);
+            UnityEngine.Object.DestroyImmediate(combatUIGO);
         }
     }
 }

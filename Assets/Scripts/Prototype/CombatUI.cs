@@ -301,7 +301,10 @@ namespace Nevergreen.Prototype
         {
             HideSkillButtons();
 
-            if (battleEndPanel != null)
+            bool hasOnVictoryRoomEffect = RunSessionManager.NextRoomData != null 
+                && RunSessionManager.NextRoomData.activationType == RoomActivationType.OnCombatVictory;
+
+            if (battleEndPanel != null && !hasOnVictoryRoomEffect)
             {
                 battleEndPanel.SetActive(true);
                 if (battleEndText != null)

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RoomDatabase
   m_EditorClassIdentifier: Assembly-CSharp::Nevergreen.Data.RoomDatabase
   availableRooms:
-  - room: {fileID: 11400000, guid: 6a39299d708eaf14fa8ab6de2c1f3a0f, type: 2}
+  - room: {fileID: 11400000, guid: ef835334adaf96445840d7e5fbf38f9f, type: 2}
     selectionRule:
       rid: 9162808348448653389
   - room: {fileID: 11400000, guid: d5735d1ecb32e284faef058a1be299c3, type: 2}
@@ -22,11 +22,18 @@ MonoBehaviour:
   - room: {fileID: 11400000, guid: ed85582afa7d8e4499cdd29df803e51b, type: 2}
     selectionRule:
       rid: 9162808348448653391
+  - room: {fileID: 11400000, guid: ef835334adaf96445840d7e5fbf38f9f, type: 2}
+    selectionRule:
+      rid: 7076121741356957772
   bossRoom: {fileID: 11400000, guid: ed05f619c1c385341bc261bf71eb7c87, type: 2}
   healRoom: {fileID: 11400000, guid: 96025301a36952640be2e9d8b62aa117, type: 2}
   references:
     version: 2
     RefIds:
+    - rid: 7076121741356957772
+      type: {class: FixedWeightRule, ns: Nevergreen.Data, asm: Assembly-CSharp}
+      data:
+        weight: 1
     - rid: 9162808348448653389
       type: {class: FixedWeightRule, ns: Nevergreen.Data, asm: Assembly-CSharp}
       data:
