@@ -93,4 +93,6 @@
 - **Pattern**: Adding optional header/title fields (e.g. room name) to a UI tooltip when the requirement specifically requested displaying a single field (e.g. `description`).
 - **Rule**: Stick strictly to requested data fields for UI components. Do not add optional extra text fields or header components unless explicitly requested or clearly specified in the design spec.
 
-
+### 17. UI Visibility Bugs — Trace Parent Panel Activation, Not Just Children
+- **Pattern**: Focusing on a placeholder child element inside a container when the real issue is the parent panel being activated too early.
+- **Rule**: When investigating "panel appears too early" bugs, always trace the **full panel hierarchy activation chain** first. The fix is almost always about *when the parent container is activated*, not about hiding individual children. Ask: "What calls `SetActive(true)` on this panel, and should that call be conditional?"
